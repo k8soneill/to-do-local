@@ -27,6 +27,36 @@ export const tasks = sqliteTable('tasks', {
 		.$defaultFn(() => new Date().toISOString())
 });
 
+// Inventory
+
+export const inventoryCategories = sqliteTable('inventory_categories', {
+	id: text('id')
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
+	name: text('name').notNull().unique(),
+	color: text('color').notNull().default('#6b7280'),
+	createdAt: text('created_at')
+		.notNull()
+		.$defaultFn(() => new Date().toISOString())
+});
+
+export const inventoryItems = sqliteTable('inventory_items', {
+	id: text('id')
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
+	name: text('name').notNull(),
+	categoryId: text('category_id').references(() => inventoryCategories.id, { onDelete: 'set null' }),
+	estimatedPrice: real('estimated_price'),
+	frequencyDays: integer('frequency_days'),
+	lastPurchasedAt: text('last_purchased_at'),
+	notes: text('notes'),
+	createdAt: text('created_at')
+		.notNull()
+		.$defaultFn(() => new Date().toISOString())
+});
+
+// Ratings
+
 export const dailyRatings = sqliteTable('daily_ratings', {
 	id: text('id')
 		.primaryKey()
