@@ -1,0 +1,117 @@
+created_at: "2026-03-19T17:15:10Z"
+end_date: "2026-04-02"
+goal: The goal of the first sprint is to plan out the architecture of the app and raise tasks for the follow up features
+id: SPR-001
+start_date: "2026-03-19"
+status: planning
+type: sprint
+---
+completed_at: "2026-03-19T17:46:05Z"
+created_at: "2026-03-19T17:38:55Z"
+description: Initialize SvelteKit project, configure TypeScript, set up dev scripts, add .gitignore, and install core dependencies
+epic: EP-001
+id: TSK-011
+sprint: SPR-001
+status: done
+summary: Project scaffolding
+type: task
+updated_at: "2026-03-19T17:46:05Z"
+---
+completed_at: "2026-03-19T17:52:16Z"
+created_at: "2026-03-19T17:38:56Z"
+description: "Design the SQLite schema: tasks table (id, title, priority, category, created_at, completed_at, date), categories table, daily_ratings table. Include migrations setup."
+epic: EP-001
+id: TSK-012
+sprint: SPR-001
+status: done
+summary: Data model design
+type: task
+updated_at: "2026-03-19T17:52:16Z"
+---
+completed_at: "2026-03-19T17:53:27Z"
+created_at: "2026-03-19T17:38:58Z"
+description: Set up SQLite database connection and ORM (e.g. better-sqlite3 or Drizzle). Ensure the DB file persists across server restarts.
+epic: EP-003
+id: TSK-013
+sprint: SPR-001
+status: done
+summary: SQLite integration
+type: task
+updated_at: "2026-03-19T17:53:27Z"
+---
+completed_at: "2026-03-19T17:55:56Z"
+created_at: "2026-03-19T17:39:00Z"
+description: "Build SvelteKit server endpoints for task CRUD: create task, list tasks (by date), update task (complete/uncomplete), delete task. Include filtering by category and sorting by priority."
+epic: EP-002
+id: TSK-014
+sprint: SPR-001
+status: done
+summary: API endpoints for tasks
+type: task
+updated_at: "2026-03-19T17:55:56Z"
+---
+completed_at: "2026-03-19T17:57:37Z"
+created_at: "2026-03-19T17:39:15Z"
+description: "Build the main task list UI: add new task form, task list with checkboxes, delete button. Display todays tasks with ability to mark complete."
+epic: EP-002
+id: TSK-015
+sprint: SPR-001
+status: done
+summary: Task list UI
+type: task
+updated_at: "2026-03-19T17:57:37Z"
+---
+completed_at: "2026-03-19T18:00:34Z"
+created_at: "2026-03-19T17:39:16Z"
+description: Add priority selection (high/medium/low) to the task creation form and display. Sort tasks by priority in the list view.
+epic: EP-004
+id: TSK-016
+sprint: SPR-001
+status: done
+summary: Priority support in UI and API
+type: task
+updated_at: "2026-03-19T18:00:34Z"
+---
+completed_at: "2026-03-19T18:04:03Z"
+created_at: "2026-03-19T17:39:17Z"
+description: "Add category management: create/edit categories, assign categories to tasks, filter task list by category."
+epic: EP-005
+id: TSK-017
+sprint: SPR-001
+status: done
+summary: Category support in UI and API
+type: task
+updated_at: "2026-03-19T18:04:03Z"
+---
+completed_at: "2026-03-19T18:07:09Z"
+created_at: "2026-03-19T17:39:18Z"
+description: Calculate and display daily completion rating (percentage of tasks completed). Show motivational feedback based on the rating.
+epic: EP-002
+id: TSK-018
+sprint: SPR-001
+status: done
+summary: Daily rating system
+type: task
+updated_at: "2026-03-19T18:07:09Z"
+---
+completed_at: "2026-03-19T18:09:33Z"
+created_at: "2026-03-19T17:39:18Z"
+description: Build a historical view page showing past days with their tasks and completion ratings. Include date navigation and summary statistics.
+epic: EP-006
+id: TSK-019
+sprint: SPR-001
+status: done
+summary: Historical view page
+type: task
+updated_at: "2026-03-19T18:09:33Z"
+---
+completed_at: "2026-03-19T18:13:43Z"
+created_at: "2026-03-19T17:39:19Z"
+description: Track consecutive days of task completion. Display current streak count and best streak. Define a completion threshold (e.g. 80% of tasks done counts as a streak day).
+epic: EP-007
+id: TSK-020
+sprint: SPR-001
+status: done
+summary: Streak tracking and display
+type: task
+updated_at: "2026-03-19T18:13:43Z"

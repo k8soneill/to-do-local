@@ -1,0 +1,8 @@
+active_assumptions: []
+conventions: []
+created_at: "2026-03-19T17:15:10Z"
+description: "This is a simple web app that I can enter tasks into and complete. It gives me ratings on my day for how much of my list I have completed - it should incentivise me to get done what I need to do"
+features: []
+id: PRD-001
+name: Local to do list
+type: product

@@ -1,0 +1,84 @@
+created_at: "2026-03-21T13:56:41Z"
+end_date: "2026-04-04"
+goal: Architecture update — switch to optimistic client-side state with Svelte 5 runes, enable animations, improve performance
+id: SPR-004
+start_date: "2026-03-21"
+status: planning
+type: sprint
+---
+completed_at: "2026-03-21T13:59:58Z"
+created_at: "2026-03-21T13:56:55Z"
+description: Replace invalidateAll() with local $state management for the task list. Server load provides initial data, mutations update local state immediately then sync to server in background. Handle sync failures with rollback and error display.
+epic: EP-010
+id: TSK-041
+sprint: SPR-004
+status: done
+summary: Refactor task list to optimistic updates
+type: task
+updated_at: "2026-03-21T13:59:58Z"
+---
+completed_at: "2026-03-21T15:13:50Z"
+created_at: "2026-03-21T13:56:57Z"
+description: "With optimistic updates in place, add Svelte transition directives: fly-in for new tasks, fade-out for deleted tasks, flip for reordering, scale for checkbox tick. Respect prefers-reduced-motion."
+epic: EP-010
+id: TSK-042
+sprint: SPR-004
+status: done
+summary: Add Svelte transitions to task list — clean professional style
+type: task
+updated_at: "2026-03-21T15:28:55Z"
+---
+completed_at: "2026-03-21T15:29:53Z"
+created_at: "2026-03-21T13:56:58Z"
+description: Apply the same optimistic update pattern to category CRUD. Update local categories state immediately, sync in background. Handle duplicate name errors gracefully with rollback.
+epic: EP-010
+id: TSK-043
+sprint: SPR-004
+status: done
+summary: Refactor category management to optimistic updates
+type: task
+updated_at: "2026-03-21T15:29:53Z"
+---
+completed_at: "2026-03-21T15:36:03Z"
+created_at: "2026-03-21T13:57:00Z"
+description: Rating save currently blocks on fetch. Make it fire-and-forget with a debounce so rapid task completions dont trigger multiple saves. Remove the $effect that fires on every data change.
+epic: EP-010
+id: TSK-044
+sprint: SPR-004
+status: done
+summary: Refactor rating save to background sync
+type: task
+updated_at: "2026-03-21T15:36:03Z"
+---
+completed_at: "2026-03-21T15:40:36Z"
+created_at: "2026-03-21T13:57:01Z"
+description: Task card markup is duplicated between the main page and history detail view. Extract into a shared Svelte component with props for interactive (checkbox, delete) vs read-only (history) modes.
+epic: EP-010
+id: TSK-045
+sprint: SPR-004
+status: done
+summary: Extract reusable TaskCard component
+type: task
+updated_at: "2026-03-21T15:40:36Z"
+---
+completed_at: "2026-03-21T15:51:44Z"
+created_at: "2026-03-21T13:57:03Z"
+description: Audit bundle size, check for unnecessary re-renders using Svelte devtools, evaluate lazy loading for calendar and history pages. Measure and improve Lighthouse scores.
+epic: EP-010
+id: TSK-046
+sprint: SPR-004
+status: done
+summary: Performance audit and optimisation
+type: task
+updated_at: "2026-03-21T15:51:44Z"
+---
+completed_at: "2026-03-21T16:00:06Z"
+created_at: "2026-03-21T13:57:05Z"
+description: "Record new decision superseding CON-005. New pattern: server load for initial data, optimistic $state for mutations, background sync. Update CLAUDE.md with the new convention."
+epic: EP-010
+id: TSK-047
+sprint: SPR-004
+status: done
+summary: Update data flow convention (supersede CON-005)
+type: task
+updated_at: "2026-03-21T16:00:06Z"

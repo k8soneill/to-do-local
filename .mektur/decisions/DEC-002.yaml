@@ -1,0 +1,17 @@
+confidence: low
+context: "SPR-001 retro identified two workflow gaps: agents didn't know to use the CLI for record creation, and architecture decisions didn't trigger coding conventions. Both stem from CLAUDE.md not being updated at the right moments."
+created_at: "2026-03-19T18:15:47Z"
+date: "2026-03-19"
+id: DEC-002
+narrative: "CLAUDE.md should be treated as a living document that evolves with the project. Two specific update triggers were identified: (1) after mektur init, CLAUDE.md must include instructions for record creation via the CLI, and (2) after any architecture decision, CLAUDE.md should be updated with coding conventions for the chosen stack. This closes the loop between decisions and enforceable rules."
+revisit_trigger: When mektur init is updated to auto-generate CLAUDE.md content.
+so_what: Without these updates, every new agent session risks repeating the same mistakes — manual YAML creation and coding without guardrails. The cost is rework and inconsistency.
+sprint: SPR-001
+status: superseded
+summary: CLAUDE.md must include record creation instructions and be updated when architecture decisions are made
+tags:
+- retro
+- workflow
+- claude-md
+type: decision
+updated_at: "2026-03-19T22:57:25Z"

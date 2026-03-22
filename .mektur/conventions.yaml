@@ -1,0 +1,180 @@
+confidence: low
+created_at: "2026-03-19T18:15:21Z"
+derived_from:
+- BL-001
+enforcement: manual
+id: CON-001
+product: PRD-001
+rationale: Manually creating YAML files caused invisible records, wrong field names, missing hierarchy, and counter desync during SPR-001 planning. The CLI handles validation, ID assignment, counter updates, and correct file placement.
+rule: Always use `mektur add <type> --stdin` (via Bash) to create new records. Never manually create or edit YAML files in .mektur/.
+scope: mektur
+status: deprecated
+tags:
+- mektur
+- workflow
+- agent
+type: convention
+updated_at: "2026-03-19T22:52:57Z"
+---
+confidence: low
+created_at: "2026-03-19T18:15:26Z"
+enforcement: manual
+id: CON-002
+product: PRD-001
+rationale: DEC-001 chose SvelteKit + SQLite but no coding conventions were created. The agent implemented 10 tasks without enforceable rules. Conventions should exist from the moment a stack decision is made.
+rule: When recording an architecture decision (DEC), immediately propose coding conventions for the chosen technologies using propose_convention.
+scope: mektur
+status: deprecated
+tags:
+- mektur
+- workflow
+- architecture
+type: convention
+updated_at: "2026-03-19T22:53:10Z"
+---
+applies_to:
+- src/routes/api/**
+confidence: low
+created_at: "2026-03-19T18:15:30Z"
+enforcement: manual
+id: CON-003
+product: PRD-001
+rationale: Consistent pattern established across tasks, categories, and ratings endpoints in SPR-001. Keeps API routes discoverable and type-safe.
+rule: All API endpoints must be SvelteKit server routes under src/routes/api/. Use +server.ts files with typed RequestHandler exports. Return JSON via the json() helper.
+scope: api
+status: active
+tags:
+- sveltekit
+- api
+type: convention
+updated_at: "2026-03-19T22:53:34Z"
+---
+applies_to:
+- src/lib/server/db/**
+- drizzle.config.ts
+confidence: low
+created_at: "2026-03-19T18:15:33Z"
+derived_from:
+- BL-001
+enforcement: manual
+id: CON-004
+product: PRD-001
+rationale: better-sqlite3 is not supported in Bun. This split approach (bun:sqlite runtime, better-sqlite3 dev-only for drizzle-kit generate) was the resolution to BL-001.
+rule: Use drizzle-orm/bun-sqlite for runtime database access. Use drizzle-kit generate (not push) for migrations. Apply migrations via the custom src/lib/server/db/migrate.ts script.
+scope: database
+status: active
+tags:
+- drizzle
+- sqlite
+- bun
+type: convention
+updated_at: "2026-03-19T22:53:41Z"
+---
+applies_to:
+- src/routes/**
+confidence: low
+created_at: "2026-03-19T18:15:36Z"
+enforcement: manual
+id: CON-005
+product: PRD-001
+rationale: Consistent pattern across all pages in SPR-001. Server load keeps data fetching on the server. invalidateAll() provides simple reactivity without manual state management.
+rule: Use SvelteKit server load functions (+page.server.ts) to fetch data. Use invalidateAll() after mutations to refresh page data. Style with Tailwind CSS utility classes.
+scope: ui
+status: superseded
+tags:
+- sveltekit
+- ui
+- tailwind
+type: convention
+updated_at: "2026-03-21T15:58:33Z"
+---
+confidence: low
+created_at: "2026-03-19T22:39:12Z"
+derived_from:
+- BL-001
+enforcement: manual
+id: CON-006
+product: PRD-001
+rationale: During SPR-002, test cleanup scripts deleted user data from local.db twice — once deleting today's tasks and once losing Saturday's tasks via a DB file move. Data was unrecoverable.
+rule: Never run destructive operations (DELETE, cleanup scripts, DB file moves) against the live database (local.db). Unit tests must use in-memory databases via createTestDb(). If manual curl testing is needed, use a separate dev server instance pointed at test.db, or use far-future dates (e.g. 2099-01-01) that won't collide with real data.
+scope: testing
+status: active
+tags:
+- testing
+- data-safety
+- agent
+type: convention
+updated_at: "2026-03-19T22:53:48Z"
+---
+applies_to:
+- src/routes/api/**
+- src/lib/server/validation.ts
+confidence: low
+created_at: "2026-03-19T22:56:15Z"
+enforcement: manual
+id: CON-007
+product: PRD-001
+rationale: TSK-023 added comprehensive validation across all endpoints using a shared module. This pattern should be followed for any new endpoints to maintain consistent error responses and prevent invalid data reaching the database.
+rule: All API endpoints must validate input using the shared helpers in src/lib/server/validation.ts. Use parseJsonBody() to handle malformed JSON, and the validate* functions for field-level checks. Return errors via validationError().
+scope: api
+status: active
+tags:
+- api
+- validation
+type: convention
+updated_at: "2026-03-19T22:58:03Z"
+---
+applies_to:
+- src/**/*.spec.ts
+confidence: low
+created_at: "2026-03-19T22:56:21Z"
+enforcement: manual
+id: CON-008
+product: PRD-001
+rationale: This pattern was established in TSK-021 and produces fast (sub-100ms), isolated, reliable tests. It avoids any risk of touching the live database.
+rule: Unit tests for database operations must use the createTestDb() helper from src/lib/server/db/tests/test-db.ts which provides an in-memory SQLite database with migrations applied. Each test gets a fresh database via beforeEach().
+scope: testing
+status: active
+tags:
+- testing
+- database
+type: convention
+updated_at: "2026-03-19T22:58:08Z"
+---
+applies_to:
+- src/routes/**/*.svelte
+confidence: low
+created_at: "2026-03-21T13:43:58Z"
+enforcement: manual
+id: CON-009
+product: PRD-001
+rationale: SPR-003 proved this approach works — swapping the entire palette from indigo to teal required editing only layout.css. Hardcoded colours would have required updating every component file.
+rule: All colours in components must use design token classes (primary-*, surface-*, accent-*, rating-*, priority-*) defined in layout.css. Never use hardcoded Tailwind colour classes like bg-blue-600 or text-gray-900.
+scope: ui
+status: active
+tags:
+- design-system
+- tailwind
+- theming
+type: convention
+updated_at: "2026-03-21T13:44:58Z"
+---
+applies_to:
+- src/routes/**/*.svelte
+confidence: low
+created_at: "2026-03-21T15:58:15Z"
+derived_from:
+- BL-002
+enforcement: manual
+id: CON-010
+product: PRD-001
+rationale: CON-005 (invalidateAll pattern) prevented Svelte transitions and caused full-page reloads. The optimistic pattern gives instant UI feedback, enables animations, and uses Svelte 5 runes ($state, $derived, $effect) as intended. Proven in SPR-004 across tasks, categories, and ratings.
+rule: Use server load functions for initial page data. For mutations, update local $state optimistically then sync to the server in background via fetch. Roll back local state on sync failure. Do not use invalidateAll() for mutation responses. Use $effect to re-sync local state from server data when page params change (e.g. date navigation).
+scope: ui
+status: active
+tags:
+- svelte
+- data-flow
+- optimistic-updates
+type: convention
+updated_at: "2026-03-22T11:52:57Z"

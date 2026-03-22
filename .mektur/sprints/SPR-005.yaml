@@ -1,0 +1,70 @@
+created_at: "2026-03-22T11:56:34Z"
+end_date: "2026-04-05"
+goal: Shopping inventory foundation — new schema, CRUD API, and inventory UI for tracking items across categories
+id: SPR-005
+start_date: "2026-03-22"
+status: planning
+type: sprint
+---
+created_at: "2026-03-22T11:56:52Z"
+description: "Create inventory_categories and inventory_items tables. Items have: name, category, estimated price, purchase frequency (days), last purchased date, notes. Categories have: name, icon/color. Generate and run migration."
+epic: EP-011
+id: TSK-048
+sprint: SPR-005
+status: todo
+summary: Design inventory schema
+type: task
+---
+created_at: "2026-03-22T11:56:55Z"
+description: "Build API endpoints for inventory categories: list all, create, update, delete. Separate from task categories. Use shared validation helpers."
+epic: EP-011
+id: TSK-049
+sprint: SPR-005
+status: todo
+summary: Inventory category CRUD API
+type: task
+---
+created_at: "2026-03-22T11:56:57Z"
+description: "Build API endpoints for inventory items: list (with category filter), create, update, delete. Include marking an item as purchased (updates last purchased date)."
+epic: EP-011
+id: TSK-050
+sprint: SPR-005
+status: todo
+summary: Inventory item CRUD API
+type: task
+---
+created_at: "2026-03-22T11:56:58Z"
+description: "Create /inventory route with: item list grouped or filterable by category, add item form (name, category, estimated price, frequency), category management panel. Use optimistic updates pattern (CON-010). Match existing design system."
+epic: EP-011
+id: TSK-051
+sprint: SPR-005
+status: todo
+summary: Inventory page with item list and category management
+type: task
+---
+created_at: "2026-03-22T11:57:00Z"
+description: Add a purchase button/action on each inventory item. Records the current date as last purchased. Show days since last purchase and days until next expected purchase based on frequency. Visual indicator for overdue items.
+epic: EP-011
+id: TSK-052
+sprint: SPR-005
+status: todo
+summary: Mark item as purchased flow
+type: task
+---
+created_at: "2026-03-22T11:57:05Z"
+description: Add Inventory link to the app shell nav bar with a shopping bag icon. Active state highlighting when on /inventory.
+epic: EP-011
+id: TSK-053
+sprint: SPR-005
+status: todo
+summary: Add inventory to navigation
+type: task
+---
+created_at: "2026-03-22T11:57:07Z"
+description: Write tests for inventory_categories and inventory_items CRUD operations using createTestDb(). Test validation, purchase recording, frequency calculations, and edge cases.
+epic: EP-011
+id: TSK-054
+sprint: SPR-005
+status: todo
+summary: Unit tests for inventory schema and API
+type: task

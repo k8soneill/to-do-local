@@ -1,0 +1,7 @@
+created_at: "2026-03-19T17:30:00Z"
+description: Provide a historical view of past days showing completed and incomplete tasks, along with daily ratings over time
+id: FT-006
+name: Historical view
+product: PRD-001
+status: proposed
+type: feature

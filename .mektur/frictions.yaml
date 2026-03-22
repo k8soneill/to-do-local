@@ -1,0 +1,125 @@
+category: tooling
+created_at: "2026-03-19T18:14:44Z"
+date: "2026-03-19"
+id: FRC-001
+narrative: During sprint planning, the agent created task YAML files directly in the filesystem instead of using `mektur add task --stdin`. This caused tasks to be invisible to the CLI, used wrong field names (name vs summary, feature vs epic), and missed the Feature → Epic → Task hierarchy entirely. Required deleting all manual files, creating 7 epics, and re-creating all 10 tasks via the CLI.
+resolution: Deleted manual files, discovered correct schema via CLI errors, created epics then tasks using mektur add --stdin.
+severity: medium
+so_what: CLAUDE.md must explicitly instruct agents to use `mektur add <type> --stdin` for record creation and never write YAML manually. The CLI handles validation, ID assignment, counter updates, and correct file placement.
+sprint: SPR-001
+summary: Agent manually created YAML task files instead of using mektur CLI
+tags:
+- mektur
+- workflow
+- cli
+type: friction
+---
+category: dependency-surprise
+created_at: "2026-03-19T18:14:49Z"
+date: "2026-03-19"
+id: FRC-002
+narrative: The sv create scaffolding chose better-sqlite3 as the SQLite client, but Bun doesn't support this native module. Both db:push and db:migrate via drizzle-kit failed. Required switching runtime to bun:sqlite, keeping better-sqlite3 as dev-only for drizzle-kit generate, and writing a custom migrate script.
+resolution: "Split approach: bun:sqlite for runtime, better-sqlite3 as devDependency for drizzle-kit generate, custom migrate.ts script."
+severity: medium
+so_what: When choosing a runtime (Bun) and ORM (Drizzle), verify native module compatibility upfront. The scaffolding tool's defaults may not match the runtime.
+sprint: SPR-001
+summary: better-sqlite3 not supported in Bun — discovered mid-task
+tags:
+- bun
+- drizzle
+- sqlite
+type: friction
+---
+category: spec-gap
+created_at: "2026-03-19T18:14:52Z"
+date: "2026-03-19"
+id: FRC-003
+narrative: DEC-001 (SvelteKit + SQLite) was recorded but no enforceable coding conventions were proposed alongside it. The project was empty at mektur init time so conventions couldn't be bootstrapped from code. The agent proceeded through all implementation tasks without any formal rules about SvelteKit patterns, Drizzle usage, or API design.
+severity: low
+so_what: Architecture decisions should immediately trigger propose_convention calls for the chosen stack. Without this, the agent has no enforceable guardrails during implementation.
+sprint: SPR-001
+summary: No coding conventions created when architecture decision was made
+tags:
+- conventions
+- workflow
+- architecture
+type: friction
+---
+category: tooling
+created_at: "2026-03-19T22:35:02Z"
+date: "2026-03-19"
+id: FRC-004
+impact_hours: 0.5
+narrative: During API endpoint development and testing (TSK-014 through TSK-020), the agent used curl scripts to create test data, verify features, then clean up by deleting all tasks for the given date. These cleanup scripts ran against the live local.db database via the dev server. When testing on today's date, the cleanup deleted the user's real tasks along with the test data. The user lost all tasks for 2026-03-19.
+resolution: Data was not recoverable. Need to add safeguards to prevent this in future.
+severity: high
+so_what: Test scripts must never run against the production/live database. Either use a dedicated test database, run tests against an in-memory DB (as the unit tests already do), or use a unique date/prefix for test data that won't collide with real data. The agent should never delete data from the live DB as part of testing.
+sprint: SPR-002
+summary: Test cleanup scripts deleted user data — tests ran against live database
+tags:
+- data-loss
+- testing
+- dev-workflow
+type: friction
+---
+category: tooling
+created_at: "2026-03-19T22:55:07Z"
+date: "2026-03-19"
+id: FRC-005
+led_to:
+- CON-006
+narrative: The agent deleted user tasks by running curl cleanup scripts against the dev server (which uses local.db), and then lost additional data by moving local.db aside during the auto-migration test (TSK-026). Both incidents resulted in unrecoverable data loss. This was the most significant friction in SPR-002.
+resolution: Created CON-006 and TSK-032 (test data isolation). Added .env.test with DATABASE_URL=test.db and configured vitest to use it.
+severity: medium
+so_what: CON-006 was created to prevent this. Unit tests already use in-memory DBs. Future manual testing must use test.db or far-future dates. The agent must never run DELETE or file-move operations against local.db.
+sprint: SPR-002
+summary: Agent caused data loss twice by running destructive operations against live DB during testing
+tags:
+- data-loss
+- testing
+type: friction
+---
+category: tooling
+created_at: "2026-03-19T22:55:09Z"
+date: "2026-03-19"
+id: FRC-006
+narrative: The eslint rule svelte/no-navigation-without-resolve flagged every href and goto() call, even for static routes like / and /history where resolveRoute adds no value. Using resolveRoute on these routes didn't satisfy the rule either. Had to disable the rule globally.
+severity: low
+so_what: When adopting eslint-plugin-svelte recommended config, review which rules are appropriate for the project. Some rules are designed for apps with parameterized routes and add noise to simpler apps.
+sprint: SPR-002
+summary: svelte/no-navigation-without-resolve lint rule false positives on static routes
+tags:
+- eslint
+- svelte
+- dx
+type: friction
+---
+category: spec-gap
+created_at: "2026-03-21T13:43:54Z"
+date: "2026-03-21"
+id: FRC-007
+narrative: The first pass at TSK-034 used an indigo primary and zinc surfaces. The user reported 'the UI doesn't look any different' because the colours were very close to Tailwind's defaults. Required a second iteration to switch to teal with slate surfaces and a tinted body background (surface-100 instead of surface-50) to create visible contrast.
+severity: low
+so_what: When creating a design system, start with colours that are obviously different from the framework defaults. Use a tinted body background rather than near-white to make cards pop. Get user feedback early before applying the palette across all pages.
+sprint: SPR-003
+summary: Initial design system colours were too similar to defaults — user couldn't see a difference
+tags:
+- design
+- ux
+- feedback
+type: friction
+---
+category: spec-gap
+created_at: "2026-03-21T16:44:00Z"
+date: "2026-03-21"
+id: FRC-008
+narrative: "TSK-042 went through three iterations: (1) CSS keyframe animations that didn't fire due to invalidateAll (SPR-003), (2) custom Svelte transition functions attempting physics-like drop and shatter effects that looked wrong, (3) clean professional transitions (slide, fly, fade) that worked well. The user wanted tasks to 'fall from the add box' and 'break apart on delete' — effects that aren't achievable with CSS transforms alone."
+severity: low
+so_what: Set realistic expectations for CSS-based animations upfront. Slides, fades, and scales look professional. Physics and particle effects need canvas/GSAP. Don't promise flashy effects then iterate to simple ones — start with what CSS does well.
+sprint: SPR-004
+summary: Flashy animation expectations vs CSS capabilities — two failed iterations before settling on professional style
+tags:
+- animations
+- ux
+- expectations
+type: friction

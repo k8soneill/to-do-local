@@ -1,0 +1,32 @@
+confidence: high
+context: Greenfield local to-do app needs a web framework and persistence layer. Must be simple, run locally, and persist data across reboots.
+created_at: "2026-03-19T17:33:15Z"
+date: "2026-03-19"
+feature: FT-003
+id: DEC-001
+narrative: Chose SvelteKit as the frontend/backend framework with SQLite for persistence. SvelteKit provides a full-stack solution with server-side API routes, minimal boilerplate, and excellent DX. SQLite is the simplest persistence option for a local app — no database server needed, just a file on disk.
+options_considered:
+- name: SvelteKit + SQLite
+  reason: Full-stack, minimal setup, file-based DB, user preference for Svelte
+  verdict: chosen
+- name: React/Next.js + SQLite
+  reason: Heavier framework for a simple app
+  verdict: rejected
+- name: Express + vanilla HTML + SQLite
+  reason: More manual wiring, no built-in routing or SSR
+  verdict: rejected
+- name: SvelteKit + JSON file
+  reason: No query capability, won't scale to historical views and streaks
+  verdict: rejected
+revisit_trigger: If the app needs multi-user support or cloud sync, SQLite may not suffice.
+so_what: All implementation tasks should use SvelteKit conventions (routes, server endpoints, load functions) and SQLite via an ORM like Drizzle or better-sqlite3.
+sprint: SPR-001
+status: active
+summary: Use SvelteKit with SQLite for the to-do app
+tags:
+- architecture
+- stack
+- sveltekit
+- sqlite
+type: decision
+updated_at: "2026-03-19T22:51:16Z"

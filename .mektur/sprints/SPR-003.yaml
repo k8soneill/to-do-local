@@ -1,0 +1,95 @@
+created_at: "2026-03-19T23:00:50Z"
+end_date: "2026-04-02"
+goal: UX overhaul — improve visual design, add calendar view for task scheduling, better colour scheme and layout
+id: SPR-003
+start_date: "2026-03-19"
+status: planning
+type: sprint
+---
+completed_at: "2026-03-21T13:38:59Z"
+created_at: "2026-03-19T23:02:35Z"
+description: Replace the prev/next day arrows with a proper calendar widget. Show a month view where each day displays a dot or count indicating tasks. Click a day to view/add tasks for that date. Highlight today and days with tasks.
+epic: EP-009
+id: TSK-033
+sprint: SPR-003
+status: done
+summary: Calendar view for task scheduling
+type: task
+updated_at: "2026-03-21T13:38:59Z"
+---
+completed_at: "2026-03-21T13:17:27Z"
+created_at: "2026-03-19T23:02:45Z"
+description: Define a cohesive colour palette and design tokens. Replace the ad-hoc grays/blues with a consistent theme. Add dark mode support. Apply the palette across all pages for a unified look.
+epic: EP-009
+id: TSK-034
+sprint: SPR-003
+status: done
+summary: Design system and colour palette
+type: task
+updated_at: "2026-03-21T13:17:27Z"
+---
+completed_at: "2026-03-21T13:24:55Z"
+created_at: "2026-03-19T23:02:46Z"
+description: Add a proper app shell with a sidebar or top navigation bar. Include nav links to Home, Calendar, and History. Add the app name/logo. Make navigation feel like a real app rather than separate pages.
+epic: EP-009
+id: TSK-035
+sprint: SPR-003
+status: done
+summary: App shell and navigation layout
+type: task
+updated_at: "2026-03-21T13:24:55Z"
+---
+completed_at: "2026-03-21T13:27:57Z"
+created_at: "2026-03-19T23:02:48Z"
+description: Improve task card design with better spacing, hover effects, subtle shadows, and smoother transitions. Add a visual priority indicator (coloured left border or icon) instead of just a text badge. Make completed tasks visually distinct but not distracting.
+epic: EP-009
+id: TSK-036
+sprint: SPR-003
+status: done
+summary: Redesign task list cards
+type: task
+updated_at: "2026-03-21T13:27:57Z"
+---
+completed_at: "2026-03-21T13:30:09Z"
+created_at: "2026-03-19T23:02:51Z"
+description: Make the add task form more polished. Consider an expandable input that reveals priority and category options on focus. Better visual hierarchy between the input and the options.
+epic: EP-009
+id: TSK-037
+sprint: SPR-003
+status: done
+summary: Redesign add task form
+type: task
+updated_at: "2026-03-21T13:30:09Z"
+---
+completed_at: "2026-03-21T13:35:05Z"
+created_at: "2026-03-19T23:02:52Z"
+description: Improve the daily rating display with a more visually appealing progress indicator (e.g. circular progress ring instead of flat bar). Redesign the streak and stats sections to feel more like achievement badges.
+epic: EP-009
+id: TSK-038
+sprint: SPR-003
+status: done
+summary: Redesign progress and stats display
+type: task
+updated_at: "2026-03-21T13:35:05Z"
+---
+completed_at: "2026-03-21T13:41:39Z"
+created_at: "2026-03-19T23:02:54Z"
+description: Improve the history page layout. Better visual hierarchy between overview stats and day list. Add a mini chart or heatmap showing completion rates over time. Improve the detail view styling to match the new task card design.
+epic: EP-009
+id: TSK-039
+sprint: SPR-003
+status: done
+summary: Redesign history page
+type: task
+updated_at: "2026-03-21T13:41:39Z"
+---
+completed_at: "2026-03-21T13:45:50Z"
+created_at: "2026-03-19T23:02:56Z"
+description: "Add subtle animations: task completion (checkbox tick animation), task deletion (slide out), adding a task (slide in), progress bar changes. Keep animations fast and purposeful — they should feel snappy, not slow."
+epic: EP-009
+id: TSK-040
+sprint: SPR-003
+status: done
+summary: Micro-interactions investigated — not feasible with current data flow (see BL-002)
+type: task
+updated_at: "2026-03-21T13:53:44Z"

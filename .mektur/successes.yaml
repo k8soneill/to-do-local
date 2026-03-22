@@ -1,0 +1,164 @@
+attributed_to:
+- DEC-001
+created_at: "2026-03-19T18:15:03Z"
+date: "2026-03-19"
+evidence: mektur list task shows TSK-011 through TSK-020 all in done status. The app builds cleanly, all API endpoints tested via curl, and the UI renders correctly at localhost:5199.
+id: SUC-001
+narrative: SPR-001 was planned for 2 weeks (Mar 19 – Apr 2) but all 10 tasks were completed on day one. The sprint delivered a fully functional to-do app with task CRUD, priorities, categories, daily ratings with motivational feedback, historical view, and streak tracking.
+sprint: SPR-001
+summary: All 10 sprint tasks completed in a single session
+tags:
+- velocity
+- delivery
+type: success
+---
+attributed_to:
+- BL-001
+created_at: "2026-03-19T18:15:08Z"
+date: "2026-03-19"
+evidence: TSK-013 briefing included BL-001 in its context. No time was wasted re-discovering the incompatibility in any subsequent task.
+id: SUC-002
+narrative: After documenting the better-sqlite3/Bun incompatibility as BL-001 during TSK-012, the build log appeared in every subsequent task briefing. This meant the agent never re-attempted the broken approach — it knew to use bun:sqlite from the start for all later tasks.
+sprint: SPR-001
+summary: BL-001 (better-sqlite3/Bun incompatibility) prevented repeated debugging
+tags:
+- build-log
+- knowledge-reuse
+type: success
+---
+attributed_to:
+- DEC-001
+created_at: "2026-03-19T18:15:12Z"
+date: "2026-03-19"
+evidence: 10 tasks covering full CRUD, 4 API route files, 3 page routes, schema with 3 tables, migrations, and streak calculation — all built and working in one session.
+id: SUC-003
+narrative: The chosen stack (DEC-001) enabled rapid development. SvelteKit's server routes eliminated the need for a separate API framework. Drizzle provided type-safe queries with minimal boilerplate. Bun's fast startup made the dev loop tight. The sv create scaffolding (with drizzle add-on) set up most of the infrastructure automatically.
+sprint: SPR-001
+summary: SvelteKit + Drizzle + Bun stack proved highly productive for local-first apps
+tags:
+- architecture
+- sveltekit
+- drizzle
+- bun
+type: success
+---
+created_at: "2026-03-19T22:55:31Z"
+date: "2026-03-19"
+evidence: mektur list task shows TSK-021 through TSK-032 all in done status. Build, lint, check, and 40 tests all pass.
+id: SUC-004
+narrative: SPR-002 planned 10 polish/hardening tasks and completed all of them plus 2 unplanned tasks (TSK-031 date picker, TSK-032 test isolation) that emerged from user needs and the data loss incident. The sprint adapted to real-world feedback without losing focus on the hardening goal.
+sprint: SPR-002
+summary: All 12 SPR-002 tasks completed including 2 unplanned additions
+tags:
+- velocity
+- adaptability
+type: success
+---
+attributed_to:
+- BL-001
+created_at: "2026-03-19T22:55:33Z"
+date: "2026-03-19"
+evidence: 40 tests across 4 files run in under 100ms. No flakiness or test pollution observed.
+id: SUC-005
+narrative: "The createTestDb() helper using bun:sqlite :memory: databases made unit tests fast (40 tests in ~80ms) and completely isolated. Each test gets a fresh migrated database with zero risk to production data. The pattern established in TSK-021 was reused for streak tests in TSK-022."
+sprint: SPR-002
+summary: Test infrastructure using in-memory SQLite proved fast and reliable
+tags:
+- testing
+- performance
+type: success
+---
+attributed_to:
+- CON-006
+created_at: "2026-03-19T22:55:42Z"
+date: "2026-03-19"
+evidence: CON-006 is active. TSK-032 delivered .env.test and vitest env config. No further data loss after the convention was established.
+id: SUC-006
+narrative: When the agent deleted user data during testing, the incident was immediately recorded as friction, a convention was proposed and activated, and a remediation task (TSK-032) was created and completed in the same sprint. The mektur workflow worked as designed — friction led to a convention that prevents recurrence.
+sprint: SPR-002
+summary: FRC-004 data loss incident led to immediate preventive convention (CON-006)
+tags:
+- process
+- learning-loop
+type: success
+---
+created_at: "2026-03-21T13:43:27Z"
+date: "2026-03-21"
+evidence: 7 of 8 tasks done. Only TSK-040 (micro-interactions/animations) remains. All pages share a consistent design language via the theme tokens in layout.css.
+id: SUC-007
+narrative: "SPR-003 delivered a complete visual overhaul: teal design system, app shell with navigation, redesigned task cards with custom circular checkboxes and priority borders, card-style add form, circular progress rings, calendar month view, and redesigned history page. The app now looks and feels like a real product rather than a developer prototype."
+sprint: SPR-003
+summary: 7 of 8 UX tasks completed — app went from scaffolding look to polished product
+tags:
+- ux
+- design
+- delivery
+type: success
+---
+attributed_to:
+- DEC-001
+created_at: "2026-03-21T13:43:31Z"
+date: "2026-03-21"
+evidence: Palette swap completed in one edit to layout.css. No component files needed updating for the colour change.
+id: SUC-008
+narrative: When the user requested a teal colour scheme instead of the initial indigo, the change was a single edit to layout.css. All components picked up the new palette automatically because they reference design tokens (primary-*, surface-*, etc.) rather than hardcoded colours. This validated the @theme approach.
+sprint: SPR-003
+summary: Design token approach enabled rapid theming — palette swap from indigo to teal took one file edit
+tags:
+- design-system
+- maintainability
+type: success
+---
+attributed_to:
+- CON-006
+created_at: "2026-03-21T13:43:38Z"
+date: "2026-03-21"
+evidence: No FRC entries for data loss in SPR-003. No curl cleanup scripts run against local.db.
+id: SUC-009
+narrative: The entire UX sprint completed without any destructive operations against the live database. CON-006 (never touch live DB during testing) was followed throughout. The friction from SPR-002 was successfully prevented by the convention.
+sprint: SPR-003
+summary: No data loss during SPR-003 — CON-006 worked as intended
+tags:
+- process
+- data-safety
+type: success
+---
+attributed_to:
+- BL-002
+- DEC-003
+created_at: "2026-03-21T16:43:33Z"
+date: "2026-03-21"
+evidence: "User confirmed animations are visible: slide-in for new tasks, fly-right for deletions, flip for reordering, scale for checkbox tick."
+id: SUC-010
+narrative: The switch from invalidateAll() to optimistic local $state (TSK-041) was the key change that made Svelte transitions work. After two failed attempts in SPR-003 (CSS animations, then Svelte directives with invalidateAll), the optimistic update pattern finally enabled fly, fade, scale and flip transitions that users can actually see.
+sprint: SPR-004
+summary: Architecture refactor unlocked working Svelte transitions — animations now visible to users
+tags:
+- architecture
+- animations
+- svelte
+type: success
+---
+created_at: "2026-03-21T16:43:34Z"
+date: "2026-03-21"
+evidence: TSK-043 and TSK-044 both completed with 'no additional changes needed' — the work was done in TSK-041.
+id: SUC-011
+narrative: The core refactor task (TSK-041) was so thorough that TSK-043 (category optimistic updates) and TSK-044 (rating background sync) were already done when we got to them. This shows the value of doing the architecture change holistically rather than piecemeal.
+sprint: SPR-004
+summary: TSK-041 covered 3 tasks worth of work — optimistic refactor included categories and ratings
+tags:
+- planning
+- velocity
+type: success
+---
+created_at: "2026-03-21T16:43:36Z"
+date: "2026-03-21"
+evidence: Main page reduced by ~50 lines, history page reduced by ~40 lines. Both pages use identical card rendering via TaskCard.svelte.
+id: SUC-012
+narrative: TSK-045 extracted the task card into a shared component used by both the main page (interactive mode) and history detail (read-only mode). The component has a clean props API with an interactive flag that toggles between button and span checkboxes, and shows/hides the delete button.
+sprint: SPR-004
+summary: TaskCard component extraction eliminated ~90 lines of duplicated markup
+tags:
+- components
+- code-quality
+type: success

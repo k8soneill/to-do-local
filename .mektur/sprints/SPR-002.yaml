@@ -1,0 +1,139 @@
+created_at: "2026-03-19T18:18:46Z"
+end_date: "2026-04-02"
+goal: Polish and harden the to-do app — add tests, error handling, UX refinements, and production readiness
+id: SPR-002
+start_date: "2026-03-19"
+status: planning
+type: sprint
+---
+completed_at: "2026-03-19T22:08:39Z"
+created_at: "2026-03-19T18:20:35Z"
+description: "Write vitest tests for all API endpoints: tasks CRUD, categories CRUD, ratings upsert. Test validation, 404s, and edge cases."
+epic: EP-008
+id: TSK-021
+sprint: SPR-002
+status: done
+summary: Unit tests for API endpoints
+type: task
+updated_at: "2026-03-19T22:08:39Z"
+---
+completed_at: "2026-03-19T22:19:58Z"
+created_at: "2026-03-19T18:20:43Z"
+description: "Test streak logic: consecutive days, gap handling, threshold boundary (79% vs 80%), empty data, today-not-yet-qualifying edge case."
+epic: EP-008
+id: TSK-022
+sprint: SPR-002
+status: done
+summary: Unit tests for streak calculation
+type: task
+updated_at: "2026-03-19T22:19:58Z"
+---
+completed_at: "2026-03-19T22:22:05Z"
+created_at: "2026-03-19T18:20:45Z"
+description: Add validation for priority enum values, date format, title length. Return proper error responses for malformed JSON, missing content-type, and invalid field values.
+epic: EP-008
+id: TSK-023
+sprint: SPR-002
+status: done
+summary: Input validation and error handling on API endpoints
+type: task
+updated_at: "2026-03-19T22:22:05Z"
+---
+completed_at: "2026-03-19T22:28:53Z"
+created_at: "2026-03-19T18:20:46Z"
+description: Run svelte-check and eslint across the full codebase. Fix any type errors, unused imports, or lint violations. Ensure bun run check and bun run lint both pass cleanly.
+epic: EP-008
+id: TSK-024
+sprint: SPR-002
+status: done
+summary: TypeScript strict checks and lint pass
+type: task
+updated_at: "2026-03-19T22:28:53Z"
+---
+completed_at: "2026-03-19T22:31:21Z"
+created_at: "2026-03-19T18:20:48Z"
+description: Replace adapter-auto with adapter-node or adapter-static so the app can be served locally without the adapter-auto warning. Add a start script for production mode.
+epic: EP-008
+id: TSK-025
+sprint: SPR-002
+status: done
+summary: Configure adapter-static for local deployment
+type: task
+updated_at: "2026-03-19T22:31:21Z"
+---
+completed_at: "2026-03-19T22:37:34Z"
+created_at: "2026-03-19T18:20:50Z"
+description: Ensure the database is created and migrations are applied automatically when running bun run dev, so a fresh clone just works without manual db:migrate step.
+epic: EP-008
+id: TSK-026
+sprint: SPR-002
+status: done
+summary: Auto-run migrations on dev server startup
+type: task
+updated_at: "2026-03-19T22:37:34Z"
+---
+completed_at: "2026-03-19T22:43:05Z"
+created_at: "2026-03-19T18:20:52Z"
+description: Add loading spinners/disabled states during API calls. Show toast or inline error messages when API calls fail. Prevent double-submission of forms.
+epic: EP-008
+id: TSK-027
+sprint: SPR-002
+status: done
+summary: Loading states and error feedback in UI
+type: task
+updated_at: "2026-03-19T22:43:05Z"
+---
+completed_at: "2026-03-19T22:44:14Z"
+created_at: "2026-03-19T18:20:53Z"
+description: Add confirmation dialogs before deleting tasks and categories. Prevent accidental data loss.
+epic: EP-008
+id: TSK-028
+sprint: SPR-002
+status: done
+summary: Confirm before destructive actions
+type: task
+updated_at: "2026-03-19T22:44:14Z"
+---
+completed_at: "2026-03-19T22:49:29Z"
+created_at: "2026-03-19T18:20:55Z"
+description: Ensure the task list, add form, and history page work well on mobile screen sizes. Stack form elements vertically on small screens. Test touch targets.
+epic: EP-008
+id: TSK-029
+sprint: SPR-002
+status: done
+summary: Responsive design and mobile-friendly layout
+type: task
+updated_at: "2026-03-19T22:49:29Z"
+---
+completed_at: "2026-03-19T22:50:55Z"
+created_at: "2026-03-19T18:20:57Z"
+description: Remove vitest example files (greet.ts, greet.spec.ts), unused lib/index.ts exports, and any other scaffolding leftovers.
+epic: EP-008
+id: TSK-030
+sprint: SPR-002
+status: done
+summary: Clean up scaffolding boilerplate
+type: task
+updated_at: "2026-03-19T22:50:55Z"
+---
+completed_at: "2026-03-19T19:50:12Z"
+created_at: "2026-03-19T19:48:22Z"
+description: Add a date input to the task creation form so users can schedule tasks for future days (e.g. Saturday). Default to today but allow selecting any date. Update the page to show a date navigator so users can browse tasks by day.
+epic: EP-008
+id: TSK-031
+sprint: SPR-002
+status: done
+summary: Add date picker to task creation form
+type: task
+updated_at: "2026-03-19T19:50:12Z"
+---
+completed_at: "2026-03-19T22:39:26Z"
+created_at: "2026-03-19T22:35:04Z"
+description: "Ensure manual/integration tests never run against the live database. Options: use a separate test.db file, use far-future dates for test data, or add a test mode flag. The agent must never delete data from local.db as part of testing."
+epic: EP-008
+id: TSK-032
+sprint: SPR-002
+status: done
+summary: Isolate test data from live database
+type: task
+updated_at: "2026-03-19T22:39:26Z"

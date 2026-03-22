@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mektur": {
+      "command": "/usr/local/bin/mektur",
+      "args": ["serve"]
+    }
+  }
+}

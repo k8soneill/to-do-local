@@ -1,0 +1,59 @@
+category: dead-end
+caused_by:
+- DEC-001
+created_at: "2026-03-19T17:52:34Z"
+date: "2026-03-19"
+detail: The sv create scaffolding chose better-sqlite3 as the SQLite client, but Bun doesn't support this native module. Both `db:push` and `db:migrate` (via drizzle-kit) failed with 'better-sqlite3 is not yet supported in Bun'. drizzle-kit internally uses better-sqlite3 for its push command regardless of what driver the app uses.
+id: BL-001
+related_files:
+- src/lib/server/db/index.ts
+- src/lib/server/db/migrate.ts
+- drizzle.config.ts
+resolution: "Split the approach: use drizzle-orm/bun-sqlite with bun:sqlite for runtime (src/lib/server/db/index.ts), keep better-sqlite3 as a devDependency for drizzle-kit generate, and use a standalone migrate script (src/lib/server/db/migrate.ts) that uses bun:sqlite directly instead of drizzle-kit migrate. The db:generate command works fine since it only reads schema files. The db:push command still won't work under Bun."
+so_what: "When using Bun + Drizzle + SQLite: always use bun:sqlite for runtime, use drizzle-kit generate (not push) for migrations, and write a custom migrate script. The db:push workflow is not available under Bun."
+sprint: SPR-001
+summary: better-sqlite3 is not supported in Bun — use bun:sqlite at runtime and keep better-sqlite3 as dev-only for drizzle-kit
+tags:
+- bun
+- drizzle
+- sqlite
+- better-sqlite3
+task: TSK-012
+type: build_log
+---
+category: dead-end
+created_at: "2026-03-21T13:53:06Z"
+date: "2026-03-21"
+detail: Attempted to add entry/exit animations on task list items using both CSS animations and Svelte transition directives (fly, fade, scale, flip). Neither approach produced visible results because invalidateAll() re-fetches all data from the server load function and replaces the entire list in the DOM. Svelte sees a completely new list each time, not individual items being added or removed, so transitions never fire.
+id: BL-002
+related_files:
+- src/routes/+page.svelte
+- src/routes/layout.css
+resolution: Reverted all animation code. To support list animations, the app would need to switch from invalidateAll() to optimistic updates — mutating a local reactive array directly and syncing with the server in background. This is a significant architectural change that conflicts with CON-005 (use server load + invalidateAll).
+so_what: "The server load + invalidateAll() pattern (CON-005) is incompatible with entry/exit list animations. If animations are a priority in future, the data flow needs to change to client-side state with optimistic updates. This is a trade-off: simpler data flow vs visual polish."
+sprint: SPR-003
+summary: Svelte transitions don't work with invalidateAll() data flow — requires optimistic updates
+tags:
+- svelte
+- animations
+- architecture
+task: TSK-040
+type: build_log
+---
+category: dead-end
+created_at: "2026-03-21T15:29:11Z"
+date: "2026-03-21"
+detail: Attempted custom Svelte transition functions for a gravity-drop-with-bounce (addTask) and shatter/crumble (deleteTask). The drop didn't look like falling from the add box because CSS transitions animate at the element's final position, not from another element. The shatter was just a weird rotate/skew that didn't look like breaking apart. True physics and particle effects need canvas/GSAP, not CSS.
+id: BL-003
+related_files:
+- src/routes/+page.svelte
+resolution: "Switched to clean professional transitions: slide open for add, fly-right for delete, flip for reorder, scale for checkbox. Fast (200-250ms) and snappy."
+so_what: "Don't try to fake physics or particle effects with CSS transforms. Stick to what CSS does well: slides, fades, scales. Keep animations fast and purposeful — they should feel polished, not flashy."
+sprint: SPR-004
+summary: Flashy CSS animations (physics drops, shatter effects) don't work well — use clean transitions instead
+tags:
+- animations
+- svelte
+- ux
+task: TSK-042
+type: build_log

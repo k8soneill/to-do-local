@@ -1,0 +1,29 @@
+confidence: low
+context: CON-005 mandated using server load + invalidateAll() for all data mutations. This pattern was simple but prevented Svelte transitions from working (BL-002) and caused unnecessary full-page data reloads on every mutation.
+created_at: "2026-03-21T15:57:59Z"
+date: "2026-03-21"
+feature: FT-001
+id: DEC-003
+narrative: Replaced invalidateAll() with local $state arrays that are initialised from server load data and mutated optimistically. Mutations update local state immediately for instant UI feedback, then sync to the server in background. On failure, state is rolled back and an error is shown. This enables Svelte transition directives (fly, fade, scale, flip) to work correctly because Svelte can track individual items being added/removed from the keyed each block.
+options_considered:
+- name: Keep invalidateAll() pattern
+  reason: Prevents all list animations, causes full page data reload on every mutation
+  verdict: rejected
+- name: Optimistic local state with background sync
+  reason: Enables animations, instant UI feedback, proper Svelte 5 runes usage
+  verdict: chosen
+- name: Client-side store (Svelte store)
+  reason: Unnecessary abstraction for a single-page state, $state is simpler
+  verdict: rejected
+revisit_trigger: If the app needs real-time sync between multiple clients or tabs.
+so_what: "All new interactive pages should follow the optimistic pattern: server load for initial data, local $state for mutations, background fetch for sync, rollback on failure. invalidateAll() should only be used for full-page refreshes (e.g. after navigation)."
+sprint: SPR-004
+status: active
+summary: Switch from invalidateAll() to optimistic local state with background server sync
+supersedes: DEC-001
+tags:
+- architecture
+- svelte
+- data-flow
+- optimistic-updates
+type: decision
